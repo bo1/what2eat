@@ -70,7 +70,7 @@ public class What2eatWebService {
 
     }
 
-    @RequestMapping("/what2eat")
+    @RequestMapping(value = {"/what2eat", "/go"})
     public String pickShop() {
         String pick = shopPicker.randomPick();
         if(pick == null) {
@@ -78,6 +78,11 @@ public class What2eatWebService {
         } else {
             return "决定了！今天就吃 [" + pick + "] 吧! *^_^* ~";
         }
+    }
+
+    @RequestMapping("/")
+    public String welcome() {
+        return "你要相信我，这个主页是会有的 ：）";
     }
 
 }

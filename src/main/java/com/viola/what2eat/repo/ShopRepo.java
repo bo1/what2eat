@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ShopRepo extends CrudRepository<Shop, Long> {
-//    Optional<Shop> findById(Long id);
     Optional<Shop> findByName(String name);
-
 }
