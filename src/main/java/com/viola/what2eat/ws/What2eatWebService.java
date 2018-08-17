@@ -22,8 +22,16 @@ public class What2eatWebService {
     private ShopPicker shopPicker;
 
     @RequestMapping("/getShops")
-    public List<Shop> getShops() {
-        return (List<Shop>) shopRepo.findAll();
+    public String getShops() {
+
+        String shopNames = "";
+        List<Shop> shops =  (List<Shop>) shopRepo.findAll();
+
+        for(Shop shop : shops) {
+            shopNames += "[" + shop.getName() + "]\n";
+        }
+
+        return shopNames;
     }
 
     @RequestMapping("/delShopId")
@@ -63,7 +71,7 @@ public class What2eatWebService {
     }
 
     @RequestMapping("/what2eat")
-    public String addShop() {
+    public String pickShop() {
         String pick = shopPicker.randomPick();
         if(pick == null) {
             return "Hmm 你还没有加入喜欢的店呢~";
