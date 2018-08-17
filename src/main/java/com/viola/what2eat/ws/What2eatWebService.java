@@ -39,9 +39,9 @@ public class What2eatWebService {
         Optional<Shop> o = shopRepo.findById(id);
         if(o.isPresent()) {
             shopRepo.delete(o.get());
-            return "Deletion successfully done";
+            return "搞定搞定";
         } else {
-            return "Shop ID does not exist";
+            return "就没有这个店 :)";
         }
     }
 
@@ -50,9 +50,9 @@ public class What2eatWebService {
         Optional<Shop> o = shopRepo.findByName(name);
         if(o.isPresent()) {
             shopRepo.delete(o.get());
-            return "Deletion successfully done";
+            return "干掉辣鸡店：" + name;
         } else {
-            return "Shop ID does not exist";
+            return name + "? 不存在的不存在的";
         }
     }
 
@@ -61,11 +61,11 @@ public class What2eatWebService {
 
         Optional<Shop> o = shopRepo.findByName(name);
         if(o.isPresent()) {
-            return "Shop " + name + " already exists";
+            return "老哥，" + name + "已经在了呀";
         } else {
             Shop s = new Shop(name);
             shopRepo.save(s);
-            return "Shop added successfully";
+            return "完全o尼玛蛇皮棒棒8倍镜98k~";
         }
 
     }
@@ -74,7 +74,7 @@ public class What2eatWebService {
     public String pickShop() {
         String pick = shopPicker.randomPick();
         if(pick == null) {
-            return "Hmm 你还没有加入喜欢的店呢~";
+            return "Hmm 还没有加入喜欢的店呢~";
         } else {
             return "决定了！今天就吃 [" + pick + "] 吧! *^_^* ~";
         }

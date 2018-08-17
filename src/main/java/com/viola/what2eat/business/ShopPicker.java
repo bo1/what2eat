@@ -27,8 +27,6 @@ public class ShopPicker {
         Random rand = new Random();
         int n = rand.nextInt(count);
 
-        System.out.println("n = " + n);
-
         return shops.get(n).getName();
     }
 }
