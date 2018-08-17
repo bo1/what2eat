@@ -1,6 +1,9 @@
 # OS
 .DS_Store
 
+# Maven
+target
+
 # Compiled class file
 *.class
 
