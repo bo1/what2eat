@@ -21,23 +21,22 @@ public class What2eatWebService {
     @Autowired
     private ShopPicker shopPicker;
 
-    @RequestMapping("/getShops")
+    @RequestMapping(value = {"shops", "/getShops"})
     public String getShops() {
 
         String shopNames = "";
-        List<Shop> shops =  (List<Shop>) shopRepo.findAll();
+        List<Shop> shops = (List<Shop>) shopRepo.findAll();
 
-        for(Shop shop : shops) {
+        for (Shop shop : shops) {
             shopNames += "[" + shop.getName() + "]\n";
         }
-
         return shopNames;
     }
 
-    @RequestMapping("/delShopId")
+    @RequestMapping(value = {"delId", "/delShopId"})
     public String delShopId(@RequestParam(value = "id") long id) {
         Optional<Shop> o = shopRepo.findById(id);
-        if(o.isPresent()) {
+        if (o.isPresent()) {
             shopRepo.delete(o.get());
             return "搞定搞定";
         } else {
@@ -45,10 +44,10 @@ public class What2eatWebService {
         }
     }
 
-    @RequestMapping("/delShopName")
+    @RequestMapping(value = {"del", "/delShopName"})
     public String delShopId(@RequestParam(value = "name") String name) {
         Optional<Shop> o = shopRepo.findByName(name);
-        if(o.isPresent()) {
+        if (o.isPresent()) {
             shopRepo.delete(o.get());
             return "干掉辣鸡店：" + name;
         } else {
@@ -56,11 +55,11 @@ public class What2eatWebService {
         }
     }
 
-    @RequestMapping("/addShop")
+    @RequestMapping(value = {"add", "/addShop"})
     public String addShop(@RequestParam(value = "name") String name) {
 
         Optional<Shop> o = shopRepo.findByName(name);
-        if(o.isPresent()) {
+        if (o.isPresent()) {
             return "老哥，" + name + "已经在了呀";
         } else {
             Shop s = new Shop(name);
@@ -73,7 +72,7 @@ public class What2eatWebService {
     @RequestMapping(value = {"/what2eat", "/go"})
     public String pickShop() {
         String pick = shopPicker.randomPick();
-        if(pick == null) {
+        if (pick == null) {
             return "Hmm 还没有加入喜欢的店呢~";
         } else {
             return "决定了！今天就吃 [" + pick + "] 吧! *^_^* ~";
